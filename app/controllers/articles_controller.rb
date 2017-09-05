@@ -8,13 +8,17 @@ class ArticlesController < ApplicationController
     end
 
     def new
+        @article = Article.new
     end
 
     def create
-        @article = Article.new(article_params)#(article_params) calls the atricle_params method below private.
+      @article = Article.new(article_params)#(article_params) calls the atricle_params method below private.
 
-        @article.save
-        redirect_to @article
+        if @article.save
+          redirect_to @article
+        else
+          render 'new'
+        end
     end
 
     private
